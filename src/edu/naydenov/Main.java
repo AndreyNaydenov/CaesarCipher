@@ -12,10 +12,9 @@ public class Main extends Application {
     public void start(Stage primaryStage) throws Exception{
         Parent root = FXMLLoader.load(getClass().getResource("MainView.fxml"));
         primaryStage.setTitle("Caesar cipher");
-        primaryStage.setScene(new Scene(root));
+        primaryStage.setScene(new Scene(root, 400, 400));
         primaryStage.show();
     }
-
 
     public static void main(String[] args) {
         launch(args);

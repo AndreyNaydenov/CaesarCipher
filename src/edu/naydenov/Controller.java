@@ -17,7 +17,6 @@ public class Controller {
 
     public Controller() {
         cipher = new CaesarCipher();
-        System.out.println("ke");
     }
 
     @FXML

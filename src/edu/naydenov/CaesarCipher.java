@@ -10,7 +10,6 @@ class CaesarCipher {
     private char[] currentAlphabet;
     private int shift = 0;
     private String result = "";
-    //TODO: Add uppercase support
 
     public void setShift(int shift) {
         this.shift = shift;
@@ -44,13 +43,20 @@ class CaesarCipher {
     private static String cipherText(String text, char[] alphabet, int shift) {
         if (shift < 0) shift = shift % alphabet.length + alphabet.length;
         char[] chars = text.toCharArray();
+        boolean chIsUpper = false;
 
         for (int i = 0; i < chars.length; i++) {
             char ch = chars[i];
+            chIsUpper = false;
+            if (Character.isUpperCase(ch)) {
+                chIsUpper = true;
+                ch = Character.toLowerCase(ch);
+            }
             int index = getIndex(alphabet, ch);
             if (index == -1) continue;
             int newIndex = (index + shift) % alphabet.length;
-            chars[i] = alphabet[newIndex];
+            char newChar = chIsUpper ? Character.toUpperCase(alphabet[newIndex]) : alphabet[newIndex];
+            chars[i] = newChar;
         }
 
         return new String(chars);
