@@ -1,45 +1,62 @@
 package edu.naydenov;
 
-import javafx.scene.control.Label;
+import javafx.fxml.FXML;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
+import javafx.collections.FXCollections;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextArea;
-import javafx.scene.control.TextField;
 import javafx.scene.input.KeyEvent;
-import javafx.scene.input.MouseEvent;
 
 public class Controller {
-    public Label shift;
-    public TextField alphabet;
-    public TextArea text;
-    public TextArea result;
+    public ComboBox<String> shift;
+    public ComboBox<String> alphabet;
+    public TextArea input;
+    public TextArea output;
     private CaesarCipher cipher;
 
     public Controller() {
         cipher = new CaesarCipher();
+        System.out.println("ke");
     }
 
-    public void onLeftClicked(MouseEvent mouseEvent) {
-        cipher.decShift();
-        shiftUpdate();
+    @FXML
+    private void initialize() {
+        alphabet.setItems(FXCollections.observableArrayList("English", "Russian"));
+        alphabet.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<String>() {
+            @Override
+            public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
+                cipher.setAlphabet(newValue);
+                updateOutput();
+            }
+        });
+        alphabet.setValue("English");
+
+        shift.setItems(FXCollections.observableArrayList("1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31", "32", "33"));
+        shift.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<String>() {
+            @Override
+            public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
+                cipher.setShift(Integer.parseInt(newValue));
+                updateOutput();
+            }
+        });
+        shift.setValue("0");
+
+        input.textProperty().addListener(new ChangeListener<String>() {
+            @Override
+            public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
+                onInputChanged();
+                updateOutput();
+            }
+        });
     }
 
-    public void onRightClicked(MouseEvent mouseEvent) {
-        cipher.incShift();
-        shiftUpdate();
+    private void updateOutput() {
+        String ciphertext = cipher.getResult();
+        output.setText(ciphertext);
     }
 
-    private void shiftUpdate() {
-        shift.setText("Сдвиг: " + cipher.getShift());
-    }
-
-    public void onAlphabetChanged(KeyEvent keyEvent) {
-        cipher.setAlphabet(alphabet.getText());
-    }
-
-    public void onCipherClicked(MouseEvent mouseEvent) {
-        result.setText(cipher.getResult());
-    }
-
-    public void onTextChanged(KeyEvent keyEvent) {
-        cipher.setText(text.getText());
+    private void onInputChanged() {
+        cipher.setText(input.getText());
     }
 }

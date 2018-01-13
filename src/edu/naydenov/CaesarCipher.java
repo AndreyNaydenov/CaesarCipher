@@ -5,20 +5,15 @@ package edu.naydenov;
  */
 class CaesarCipher {
     private String text = "";
-    private char[] alphabet = {};
+    private char[] englishAlphabet = "abcdefghijklmnopqrstuvwxyz".toCharArray();
+    private char[] russianAaphabet = "абвгдеёжзийклмнопрстуфхцчшщъыьэюя".toCharArray();
+    private char[] currentAlphabet;
     private int shift = 0;
     private String result = "";
+    //TODO: Add uppercase support
 
-    void incShift() {
-        shift++;
-    }
-
-    void decShift() {
-        shift--;
-    }
-
-    int getShift() {
-        return shift;
+    public void setShift(int shift) {
+        this.shift = shift;
     }
 
     void setText(String text) {
@@ -26,11 +21,15 @@ class CaesarCipher {
     }
 
     void setAlphabet(String alphabet) {
-        this.alphabet = alphabet.toCharArray();
+        if (alphabet.equals("English")) {
+            this.currentAlphabet = englishAlphabet;
+        } else if (alphabet.equals("Russian")) {
+            this.currentAlphabet = russianAaphabet;
+        }
     }
 
     private String cipherText() {
-        return cipherText(text, alphabet, shift);
+        return cipherText(text, currentAlphabet, shift);
     }
 
     String getResult() {
