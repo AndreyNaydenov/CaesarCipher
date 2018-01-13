@@ -1,50 +1,36 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.geometry.Insets?>
-<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextArea?>
-<?import javafx.scene.control.TextField?>
-<?import javafx.scene.layout.ColumnConstraints?>
-<?import javafx.scene.layout.GridPane?>
-<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
 
-<GridPane alignment="CENTER" hgap="10" prefHeight="383.0" prefWidth="502.0" vgap="10" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.naydenov.Controller">
-    <GridPane hgap="5.0" vgap="5.0" GridPane.columnSpan="2">
-        <columnConstraints>
-            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-        </columnConstraints>
-        <rowConstraints>
-            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-        </rowConstraints>
-        <Button alignment="TOP_CENTER" onMouseClicked="#onLeftClicked" prefWidth="100.0" text="-" textAlignment="CENTER" GridPane.halignment="CENTER">Left
-        </Button>
-        <Label fx:id="shift" prefHeight="17.0" prefWidth="106.0" text="Сдвиг: 0" GridPane.columnIndex="2" GridPane.halignment="LEFT">
-           <GridPane.margin>
-               <Insets left="40.0" />
-           </GridPane.margin>
-        </Label>
-        <Button alignment="CENTER" mnemonicParsing="false" onMouseClicked="#onRightClicked" prefWidth="100.0" text="+" GridPane.columnIndex="1" GridPane.halignment="CENTER" />
-    </GridPane>
-   <TextArea fx:id="result" editable="false" prefHeight="106.0" prefWidth="452.0" wrapText="true" GridPane.hgrow="ALWAYS" GridPane.rowIndex="5" GridPane.vgrow="ALWAYS" />
-   <TextField fx:id="alphabet" onKeyReleased="#onAlphabetChanged" promptText="Введите алфавит. Например: &quot;абвгд1234&quot;" GridPane.rowIndex="1" />
-   <Button alignment="CENTER" mnemonicParsing="false" onMouseClicked="#onCipherClicked" prefHeight="25.0" prefWidth="337.0" text="Шифровать" GridPane.halignment="CENTER" GridPane.rowIndex="4" />
-   <TextArea fx:id="text" onKeyReleased="#onTextChanged" prefHeight="0.0" prefWidth="452.0" promptText="Введите текст. Например: &quot;какой хороший день&quot;" wrapText="true" GridPane.rowIndex="3" GridPane.vgrow="ALWAYS" />
-   <columnConstraints>
-      <ColumnConstraints />
-      <ColumnConstraints />
-   </columnConstraints>
-   <rowConstraints>
-      <RowConstraints />
-      <RowConstraints />
-      <RowConstraints />
-      <RowConstraints />
-      <RowConstraints minHeight="10.0" prefHeight="30.0" />
-      <RowConstraints minHeight="10.0" prefHeight="30.0" />
-   </rowConstraints>
+<VBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" spacing="5.0" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.naydenov.Controller">
+   <children>
+      <HBox alignment="CENTER" prefHeight="100.0" prefWidth="754.0" VBox.vgrow="NEVER">
+         <children>
+            <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" HBox.hgrow="ALWAYS">
+               <children>
+                  <Label text="Alphabet" />
+                  <ComboBox fx:id="alphabet" prefWidth="150.0" />
+               </children>
+            </VBox>
+            <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" HBox.hgrow="ALWAYS">
+               <children>
+                  <Label text="Shift" />
+                  <ComboBox fx:id="shift" prefWidth="150.0" />
+               </children>
+            </VBox>
+         </children>
+      </HBox>
+      <Label text="Input" />
+      <TextArea fx:id="input" prefHeight="200.0" prefWidth="200.0" wrapText="true" VBox.vgrow="ALWAYS" />
+      <Label text="Output" />
+      <TextArea fx:id="output" editable="false" prefHeight="200.0" prefWidth="200.0" wrapText="true" VBox.vgrow="ALWAYS" />
+   </children>
    <padding>
-      <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+      <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
    </padding>
-</GridPane>
+</VBox>
